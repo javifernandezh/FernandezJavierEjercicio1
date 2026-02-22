@@ -15,49 +15,73 @@ public class FernandezJavierEjercicio1 {
         System.out.println("Primer premio: " + String.format("%05d", primerPremio));
         System.out.println("Segundo premio: " + String.format("%05d", segundoPremio));
         System.out.println("Tercer premio: " + String.format("%05d", tercerPremio));
+        // Tarea 3
+        int opcion;
 
-        // Tarea 2
-        int decimo;
-        while (true) {
-            System.out.print("Introduce el número de tu décimo (1-99999): ");
+        do {
+            System.out.println("\nMenú principal:");
+            System.out.println("[1] Comprobar décimo");
+            System.out.println("[0] Salir");
+
             if (sc.hasNextInt()) {
-                decimo = sc.nextInt();
-                if (decimo >= 1 && decimo <= 99999) break;
-                else System.out.println("Error: el número debe estar entre 1 y 99999.");
+                opcion = sc.nextInt();
+                if (opcion != 0 && opcion != 1) {
+                    System.out.println("Opción no válida. Intenta de nuevo.");
+                    opcion = -1;
+                }
             } else {
-                System.out.println("Error: debes introducir un número entero.");
+                System.out.println("Error: debes introducir un número (0 o 1).");
                 sc.next();
+                opcion = -1;
             }
-        }
 
-        // Tarea 2
-        int importe;
-        while (true) {
-            System.out.print("Introduce el importe jugado (mínimo 1€): ");
-            if (sc.hasNextInt()) {
-                importe = sc.nextInt();
-                if (importe >= 1) break;
-                else System.out.println("Error: el importe mínimo es 1€.");
-            } else {
-                System.out.println("Error: debes introducir un número entero.");
-                sc.next();
+            if (opcion == 1) {
+                // Tarea 2
+                int decimo;
+                while (true) {
+                    System.out.print("Introduce el número de tu décimo (1-99999): ");
+                    if (sc.hasNextInt()) {
+                        decimo = sc.nextInt();
+                        if (decimo >= 1 && decimo <= 99999) break;
+                        else System.out.println("Error: el número debe estar entre 1 y 99999.");
+                    } else {
+                        System.out.println("Error: debes introducir un número entero.");
+                        sc.next();
+                    }
+                }
+
+                // Tarea 2
+                int importe;
+                while (true) {
+                    System.out.print("Introduce el importe jugado (mínimo 1€): ");
+                    if (sc.hasNextInt()) {
+                        importe = sc.nextInt();
+                        if (importe >= 1) break;
+                        else System.out.println("Error: el importe mínimo es 1€.");
+                    } else {
+                        System.out.println("Error: debes introducir un número entero.");
+                        sc.next();
+                    }
+                }
+
+                // Tarea 2
+                System.out.println("\nTu décimo: " + String.format("%05d", decimo));
+                System.out.println("Importe jugado: " + importe + "€");
+
+                if (decimo == primerPremio) {
+                    System.out.println("¡Primer premio! Has ganado " + (20000 * importe) + "€");
+                } else if (decimo == segundoPremio) {
+                    System.out.println("¡Segundo premio! Has ganado " + (6250 * importe) + "€");
+                } else if (decimo == tercerPremio) {
+                    System.out.println("¡Tercer premio! Has ganado " + (2500 * importe) + "€");
+                } else {
+                    System.out.println("Lo siento, no has tenido suerte");
+                }
             }
-        }
+        // Tarea 3
+        } while (opcion != 0);
 
-        // Tarea 2
-        System.out.println("\nTu décimo: " + String.format("%05d", decimo));
-        System.out.println("Importe jugado: " + importe + "€");
-
-        if (decimo == primerPremio) {
-            System.out.println("¡Primer premio! Has ganado " + (20000 * importe) + "€");
-        } else if (decimo == segundoPremio) {
-            System.out.println("¡Segundo premio! Has ganado " + (6250 * importe) + "€");
-        } else if (decimo == tercerPremio) {
-            System.out.println("¡Tercer premio! Has ganado " + (2500 * importe) + "€");
-        } else {
-            System.out.println("Lo siento, no has tenido suerte");
-        }
-
+        System.out.println("Gracias por usar la aplicación de Lotería de Navidad.");
         sc.close();
     }
 }
