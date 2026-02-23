@@ -6,31 +6,39 @@ public class FernandezJavierEjercicio1 {
         Random r = new Random();
         Scanner sc = new Scanner(System.in);
 
-        // Tarea 1
+        // Tarea 1 y Tarea 4
         int primerPremio = r.nextInt(99999) + 1;
         int segundoPremio = r.nextInt(99999) + 1;
         int tercerPremio = r.nextInt(99999) + 1;
+
+        int[] cuartosPremios = new int[2];
+        cuartosPremios[0] = r.nextInt(99999) + 1;
+        cuartosPremios[1] = r.nextInt(99999) + 1;
+
+        int reintegro = primerPremio % 10;
 
         System.out.println("Sorteo Lotería de Navidad:");
         System.out.println("Primer premio: " + String.format("%05d", primerPremio));
         System.out.println("Segundo premio: " + String.format("%05d", segundoPremio));
         System.out.println("Tercer premio: " + String.format("%05d", tercerPremio));
-        // Tarea 3
+        System.out.println("Cuartos premios: " + String.format("%05d", cuartosPremios[0]) + " , " + String.format("%05d", cuartosPremios[1]));
+        System.out.println("Reintegro: última cifra del Gordo -> " + reintegro);
+        // Tarea 3 y 4
         int opcion;
-
         do {
             System.out.println("\nMenú principal:");
             System.out.println("[1] Comprobar décimo");
+            System.out.println("[2] Resumen premios");
             System.out.println("[0] Salir");
 
             if (sc.hasNextInt()) {
                 opcion = sc.nextInt();
-                if (opcion != 0 && opcion != 1) {
+                if (opcion < 0 || opcion > 2) {
                     System.out.println("Opción no válida. Intenta de nuevo.");
                     opcion = -1;
                 }
             } else {
-                System.out.println("Error: debes introducir un número (0 o 1).");
+                System.out.println("Error: debes introducir un número (0, 1 o 2).");
                 sc.next();
                 opcion = -1;
             }
@@ -64,7 +72,7 @@ public class FernandezJavierEjercicio1 {
                     }
                 }
 
-                // Tarea 2
+                // Tarea 2 y Tarea 4
                 System.out.println("\nTu décimo: " + String.format("%05d", decimo));
                 System.out.println("Importe jugado: " + importe + "€");
 
@@ -74,9 +82,25 @@ public class FernandezJavierEjercicio1 {
                     System.out.println("¡Segundo premio! Has ganado " + (6250 * importe) + "€");
                 } else if (decimo == tercerPremio) {
                     System.out.println("¡Tercer premio! Has ganado " + (2500 * importe) + "€");
+                } else if (decimo == cuartosPremios[0] || decimo == cuartosPremios[1]) {
+                    System.out.println("¡Cuarto premio! Has ganado " + (1000 * importe) + "€");
+                } else if (decimo % 10 == reintegro) {
+                    System.out.println("¡Reintegro! Has ganado " + (1 * importe) + "€");
                 } else {
                     System.out.println("Lo siento, no has tenido suerte");
                 }
+            }
+
+            else if (opcion == 2) {
+                // Tarea 4
+                System.out.println("\n--- Resumen de premios ---");
+                System.out.println("Primer premio: " + String.format("%05d", primerPremio));
+                System.out.println("Segundo premio: " + String.format("%05d", segundoPremio));
+                System.out.println("Tercer premio: " + String.format("%05d", tercerPremio));
+                for (int i = 0; i < cuartosPremios.length; i++) {
+                    System.out.println("Cuarto premio " + (i+1) + ": " + String.format("%05d", cuartosPremios[i]));
+                }
+                System.out.println("Reintegro (última cifra del Gordo): " + reintegro);
             }
         // Tarea 3
         } while (opcion != 0);
